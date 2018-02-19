@@ -1,5 +1,3 @@
-<?php  ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,12 +21,25 @@
         </div>
         <div class="console-body">
             <div class="console-text">
-                <form action="index.html" method="post">
-                    > <input class="input_command_line" type="text" name="" value="">
+                <form action="executa.php" method="post">
+                    > <input class="input_command_line" type="text" name="command" value="">
                     <hr size="1">
                 </form>
             </div>
+            <div  class="console-body-text">
+                <?php
+                session_start();
+                $response = Array();
+                if ( !empty($_SESSION['answer']) ) {
+                    $response = $_SESSION['answer'];
+                    foreach ( $response as $item) {
+                        echo $item."<br>";
+                    }
+                    session_destroy();
+                }
 
+                ?>
+            </div>
         </div>
     </div>
 </div>

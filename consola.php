@@ -26,15 +26,24 @@
                     <hr size="1">
                 </form>
             </div>
-            <div  class="console-body-text">
+            <div class="console-body-text">
                 <?php
+                include 'constants.inc.php';
+
                 session_start();
-                $response = Array();
-                if ( !empty($_SESSION['answer']) ) {
-                    $response = $_SESSION['answer'];
-                    foreach ( $response as $item) {
-                        echo $item."<br>";
+                $multiple_response = Array();
+                if (!empty($_SESSION['answer'])) {
+                    if (is_array($_SESSION['answer'])) {
+                        $multiple_response = $_SESSION['answer'];
+
+                        foreach ($multiple_response as $item) {
+                            echo $item . "<br>";
+                        }
+                    } else {
+                        $single_response = $_SESSION['answer'];
+                        echo $single_response;
                     }
+
                     session_destroy();
                 }
 

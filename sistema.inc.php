@@ -15,15 +15,15 @@ function stats_sistema(){
     $free = disk_free_space("/");
 
     $libreGB = number_format($free / pow(10,9),2);
-    $espacio_GB = $libreGB."GB en libre<br>";
 
+    $librePorsentaje = number_format($free/$total*100,2);
+    $espacio_libre =  $libreGB."GB libre, ".$librePorsentaje."%";
 
-    $libreProsentaje = number_format($free/$total*100,2);
+    $ocupadoGB = number_format(($total-$free)/pow(10,9),2);
+    $ocupadoPorsentaje = number_format(($total-$free)/$total*100,2);
+    $espacio_ocupado = $ocupadoGB."GB utilizado, ".$ocupadoPorsentaje."%";
 
-
-
-    $espacio_por =  $libreProsentaje."% en libre";
-    array_push($espacio,$espacio_GB);
-    array_push($espacio,$espacio_por);
+    array_push($espacio, $espacio_libre, $espacio_ocupado);
+    return $espacio;
 }
 ?>

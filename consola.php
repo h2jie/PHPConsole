@@ -22,13 +22,16 @@
         <div class="console-body">
             <div class="console-text">
                 <form action="executa.php" method="post">
-                    > <input class="input_command_line" type="text" name="command" value="">
+                    <input class="input_command_line" type="text" name="command" value="">
                     <hr size="1">
                 </form>
             </div>
             <div class="console-body-text">
                 <?php
                 include 'constants.inc.php';
+
+
+
 
                 session_start();
                 $multiple_response = Array();

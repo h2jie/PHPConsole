@@ -2,6 +2,8 @@
 
 include 'constants.inc.php';
 include 'sistema.inc.php';
+include 'directoris.inc.php';
+include  'arxius.inc.php';
 
 session_start();
 
@@ -18,7 +20,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                 $list = llistar($actual_path);
                 $_SESSION['answer'] = $list;
                 break;
-
             case 'pwd':
                 $path = ruta();
                 $_SESSION['answer'] = $path;
@@ -26,6 +27,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             case 'fdisk':
                 $fdisk = stats_sistema();
                 $_SESSION['answer'] = $fdisk;
+                break;
+            case stristr($command,'mkdir'):
+                $mkdir = crea_directori($command);
+                $_SESSION['answer'] = $mkdir;
+                break;
+            case stristr($command,'rm'):
+                $rm = esborra_directori($command);
+                $_SESSION['answer'] = $rm;
                 break;
             default:
                 $list = ['Command not found'];

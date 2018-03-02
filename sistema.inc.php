@@ -1,7 +1,13 @@
 <?php
 
-function llistar($path){
-    return scandir($path);
+function llistar($dir){
+    if (empty($dir)){
+        return scandir(BASE);
+
+    }else{
+        return scandir(BASE.DIRECTORY_SEPARATOR.$dir);
+
+    }
 }
 
 function ruta(){

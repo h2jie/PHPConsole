@@ -15,9 +15,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     if (!empty($_POST["command"]) | !isset($_POST["command"])){
         $command = $_POST["command"];
 
-        switch ($command){
+
+        $comando = explode(' ',$command);
+        $nameCommand = strtolower($comando[0]);
+
+        switch ($nameCommand){
             case 'ls':
-                $list = llistar($actual_path);
+                $dir = $comando[1];
+                $list = llistar($dir);
                 $_SESSION['answer'] = $list;
                 break;
             case 'pwd':
@@ -28,13 +33,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                 $fdisk = stats_sistema();
                 $_SESSION['answer'] = $fdisk;
                 break;
-            case stristr($command,'mkdir'):
+            case 'mkdir':
                 $mkdir = crea_directori($command);
                 $_SESSION['answer'] = $mkdir;
                 break;
-            case stristr($command,'rm'):
+            case 'rm':
                 $rm = esborra_directori($command);
                 $_SESSION['answer'] = $rm;
+                break;
+            case 'mv':
+                $dir=$comando[1];
+                $rutadesti = $comando[2];
+                $mv = mou_directori($dir,$rutadesti);
+                $_SESSION['answer']=$mv;
+                break;
+            case 'cp':
+                $dir=$comando[1];
+                $rutadesti = $comando[2];
+                $cp = copia_directori($dir,$rutadesti);
+                $_SESSION['answer']=$cp;
                 break;
             default:
                 $list = ['Command not found'];

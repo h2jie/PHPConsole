@@ -30,9 +30,6 @@
                 <?php
                 include 'constants.inc.php';
 
-
-
-
                 session_start();
                 $multiple_response = Array();
                 if (!empty($_SESSION['answer'])) {

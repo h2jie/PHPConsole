@@ -54,14 +54,31 @@ function mou_directori($dir, $rutadesti)
 
 function copia_directori($dir, $rutadesti)
 {
-    /*if (file_exists(BASE.DIRECTORY_SEPARATOR.$dir)){
-        copy(BASE.DIRECTORY_SEPARATOR.$dir, BASE.DIRECTORY_SEPARATOR.$rutadesti);
-        return 'Carpeta copiado';
+    if (file_exists(BASE.DIRECTORY_SEPARATOR.$dir)){
+        $content = scandir($dir);
+
+        if (empty(BASE.DIRECTORY_SEPARATOR.$dir)){
+            return BASE.$dir;
+        }else{
+            foreach ($content as $item){
+                $current_file = BASE.DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$item;
+                echo $current_file;
+                //return $current_file;
+            }
+        }
+
+
+
+
+        //copy(BASE.DIRECTORY_SEPARATOR.$dir, BASE.DIRECTORY_SEPARATOR.$rutadesti);
+
     }else{
         return 'La carpeta no existe';
-    }*/
+    }
 
-    $src = opendir($dir);
+
+
+/*
     if (mkdir(BASE.DIRECTORY_SEPARATOR.$rutadesti)) {
         while (false !== ($file = readdir($src))) {
             if (($file != '.') && ($file != '..')) {
@@ -70,7 +87,7 @@ function copia_directori($dir, $rutadesti)
             }
         }
         closedir($src);
-    }
+    }*/
 
 
 }

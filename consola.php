@@ -46,7 +46,6 @@
 
                     session_destroy();
                 }
-
                 ?>
             </div>
         </div>

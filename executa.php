@@ -53,6 +53,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                 $cp = copia_directori($dir,$rutadesti);
                 $_SESSION['answer']=$cp;
                 break;
+            case 'find':
+                $fixer = $comando[1];
+                $dir = $comando[2];
+
+
             default:
                 $list = ['Command not found'];
                 $_SESSION['answer'] = $list;

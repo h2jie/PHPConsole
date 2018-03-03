@@ -37,27 +37,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                 $mkdir = crea_directori($command);
                 $_SESSION['answer'] = $mkdir;
                 break;
-            case 'rm':
-                $rm = esborra_directori($command);
-                $_SESSION['answer'] = $rm;
+            case 'rmdir':
+                $rmdir = esborra_directori($command);
+                $_SESSION['answer'] = $rmdir;
                 break;
-            case 'mv':
+            case 'mvdir':
                 $dir=$comando[1];
                 $rutadesti = $comando[2];
                 $mv = mou_directori($dir,$rutadesti);
                 $_SESSION['answer']=$mv;
                 break;
-            case 'cp':
+            case 'cpdir':
                 $dir=$comando[1];
                 $rutadesti = $comando[2];
                 $cp = copia_directori($dir,$rutadesti);
                 $_SESSION['answer']=$cp;
                 break;
+            case 'cp':
+                $fitxer = $comando[1];
+                $rutadesti = $comando[2];
+                $rm = copia_fitxer($fitxer,$rutadesti);
+                $_SESSION['answer']=$rm;
+
+                break;
             case 'find':
                 $fixer = $comando[1];
                 $dir = $comando[2];
 
-
+                break;
             default:
                 $list = ['Command not found'];
                 $_SESSION['answer'] = $list;

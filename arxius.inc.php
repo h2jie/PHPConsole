@@ -1,17 +1,16 @@
 <?php
-
 function find_fixer($fixer, $dir){
-    $content = scandir($dir);
+    $path = BASE.DIRECTORY_SEPARATOR.$dir;
+    $content = scandir($path);
 
     foreach ($content as $item) {
-        if (is_file($content)){
+        if (is_file($path.DIRECTORY_SEPARATOR.$item)){
             if ($fixer == $item){
-                return $item;
+                return 'Fichero encontrado: '.$item;
             }
-        }else{
-            return null;
         }
     }
+    return 'Fichero no existe';
 }
 
 
@@ -41,7 +40,7 @@ function esborra_fitxer($fitxer){
         unlink($archivo);
         return 'Archivo '.$fitxer.' borrado';
     }else{
-        return 'Archovo no existe';
+        return 'Archivo no existe';
     }
 }
 
@@ -60,10 +59,10 @@ function mou_fitxer($fitxer,$rutadesti){
 
 function copia_fitxer($fitxer, $rutadesti){
     $archivoOriginal = BASE.DIRECTORY_SEPARATOR.$fitxer;
-    $archivoDesti = BASE.DIRECTORY_SEPARATOR.$rutadesti;
+    $archivoDesti = BASE.DIRECTORY_SEPARATOR.$rutadesti.DIRECTORY_SEPARATOR;
 
-    if (file_exists($archivoOriginal)){
-        if (copy($archivoOriginal,$archivoDesti)){
+    if (file_exists($fitxer)){
+        if (copy($fitxer,$rutadesti)){
             return 'Archivo '.$fitxer.' copiado como '.$rutadesti;
         }else{
             return 'Error de copiar archivo';
@@ -71,8 +70,6 @@ function copia_fitxer($fitxer, $rutadesti){
     }else{
         return 'Archivo no existe';
     }
-
-
 }
 
 

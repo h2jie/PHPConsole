@@ -22,20 +22,31 @@ function crea_directori($dir)
 
 function esborra_directori($dir)
 {
-    $carpeta = explode(' ', $dir);
-    $nombreCarpeta = $carpeta[1];
+    //return $dir;
+    $dir_path = BASE.DIRECTORY_SEPARATOR.$dir;
 
-    if (file_exists(BASE . DIRECTORY_SEPARATOR . $nombreCarpeta)) {
-        $content = scandir($nombreCarpeta);
+    if (file_exists($dir_path)) {
+        $content = scandir($dir_path);
         if (empty($content)) {
-            rmdir(BASE . DIRECTORY_SEPARATOR . $nombreCarpeta);
-            return 'Carpeta borrado';
+            if (is_dir()){
+                rmdir($dir_path);
+            }else{
+                unlink($dir_path);
+            }
         } else {
             foreach ($content as $item) {
-                $current_file = $nombreCarpeta . DIRECTORY_SEPARATOR . $item;
-                unlink($current_file);
+                $current_file = $dir_path . DIRECTORY_SEPARATOR . $item;
+                if ($item!= "." && $item!= ".."){
+                    if(is_dir($current_file)){
+                        esborra_directori($dir.DIRECTORY_SEPARATOR.$item);
+                    }else{
+                        unlink($current_file);
+                    }
+                }
             }
-            rmdir($nombreCarpeta);
+            if (rmdir($dir_path)){
+                return 'Carpeta borrado';
+            }
         }
     } else {
         return 'La carpeta no existe';
@@ -52,44 +63,21 @@ function mou_directori($dir, $rutadesti)
     }
 }
 
-function copia_directori($dir, $rutadesti)
-{
-    if (file_exists(BASE.DIRECTORY_SEPARATOR.$dir)){
-        $content = scandir($dir);
-
-        if (empty(BASE.DIRECTORY_SEPARATOR.$dir)){
-            return BASE.$dir;
-        }else{
-            foreach ($content as $item){
-                $current_file = BASE.DIRECTORY_SEPARATOR.$dir.DIRECTORY_SEPARATOR.$item;
-                echo $current_file;
-                //return $current_file;
+function cp_dir($dir, $rutdesti){
+    $origin = BASE.DIRECTORY_SEPARATOR.$dir;
+    $destiny = BASE.DIRECTORY_SEPARATOR.$rutdesti;
+    if (is_dir($origin)){
+        $content = scandir($origin);
+        $response = Array();
+        foreach ($content as $item) {
+            if ($item!= "." && $item!= ".."){
+                array_push($response,copia_fitxer($origin.DIRECTORY_SEPARATOR.$item,$destiny.DIRECTORY_SEPARATOR.$item));
             }
         }
-
-
-
-
-        //copy(BASE.DIRECTORY_SEPARATOR.$dir, BASE.DIRECTORY_SEPARATOR.$rutadesti);
-
+        return $response;
     }else{
-        return 'La carpeta no existe';
+        return 'No se ha podido copiar correctamente';
     }
-
-
-
-/*
-    if (mkdir(BASE.DIRECTORY_SEPARATOR.$rutadesti)) {
-        while (false !== ($file = readdir($src))) {
-            if (($file != '.') && ($file != '..')) {
-                copy(BASE . DIRECTORY_SEPARATOR . $dir . DIRECTORY_SEPARATOR . $file, BASE . DIRECTORY_SEPARATOR . $rutadesti . DIRECTORY_SEPARATOR . $file);
-                return 'copiado';
-            }
-        }
-        closedir($src);
-    }*/
-
-
 }
 
 ?>

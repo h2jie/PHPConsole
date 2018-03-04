@@ -38,7 +38,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                 $_SESSION['answer'] = $mkdir;
                 break;
             case 'rmdir':
-                $rmdir = esborra_directori($command);
+                $nombreCarpeta = $comando[1];
+                $rmdir = esborra_directori($nombreCarpeta);
                 $_SESSION['answer'] = $rmdir;
                 break;
             case 'mvdir':
@@ -50,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             case 'cpdir':
                 $dir=$comando[1];
                 $rutadesti = $comando[2];
-                $cp = copia_directori($dir,$rutadesti);
+                $cp = cp_dir($dir,$rutadesti);
                 $_SESSION['answer']=$cp;
                 break;
             case 'cp':
@@ -63,7 +64,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             case 'find':
                 $fixer = $comando[1];
                 $dir = $comando[2];
-
+                $find = find_fixer($fixer,$dir);
+                $_SESSION['answer']= $find;
                 break;
             default:
                 $list = ['Command not found'];

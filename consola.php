@@ -28,7 +28,7 @@
             </div>
             <div class="console-body-text">
 
-                <iframe src="console_result.php" height="100%;" width="100%">
+                <iframe src="console_result.php" frameborder="0" height="100%;" width="100%">
 
                 </iframe>
             </div>

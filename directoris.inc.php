@@ -64,13 +64,12 @@ function mou_directori($dir, $rutadesti)
 
 function copia_directori($dir, $rutdesti){
     $origin = BASE.DIRECTORY_SEPARATOR.$dir;
-    $destiny = BASE.DIRECTORY_SEPARATOR.$rutdesti;
     if (is_dir($origin)){
         $content = scandir($origin);
         $response = Array();
         foreach ($content as $item) {
             if ($item!= "." && $item!= ".."){
-                array_push($response,copia_fitxer($origin.DIRECTORY_SEPARATOR.$item,$destiny.DIRECTORY_SEPARATOR.$item));
+                array_push($response,copia_fitxer($dir.DIRECTORY_SEPARATOR.$item,$rutdesti));
             }
         }
         return $response;

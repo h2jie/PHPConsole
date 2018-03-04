@@ -59,11 +59,15 @@ function mou_fitxer($fitxer,$rutadesti){
 
 function copia_fitxer($fitxer, $rutadesti){
     $carpeta_desti = BASE.DIRECTORY_SEPARATOR.$rutadesti;
+    $exploded_path = explode(DIRECTORY_SEPARATOR,$fitxer);
+    //return $exploded_path;
+    $fitxer_path = $exploded_path[count($exploded_path)-1];
     if (file_exists(BASE.DIRECTORY_SEPARATOR.$fitxer)){
         if (is_dir($carpeta_desti)){
-            if (copy(BASE.DIRECTORY_SEPARATOR.$fitxer,$carpeta_desti.DIRECTORY_SEPARATOR.$fitxer)){
+            if (copy(BASE.DIRECTORY_SEPARATOR.$fitxer,$carpeta_desti.DIRECTORY_SEPARATOR.$fitxer_path)){
                 return 'Archivo '.$fitxer.' copiado a '.$rutadesti;
             }else{
+                return BASE.DIRECTORY_SEPARATOR.$fitxer.' '.$carpeta_desti.DIRECTORY_SEPARATOR.$fitxer;
                 return 'Error de copiar archivo';
             }
         }else{
@@ -72,6 +76,7 @@ function copia_fitxer($fitxer, $rutadesti){
             }
         }
     }else{
+        //return BASE.DIRECTORY_SEPARATOR.$fitxer;
         return 'Archivo no existe';
     }
 

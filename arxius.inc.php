@@ -74,6 +74,34 @@ function copia_fitxer($fitxer, $rutadesti){
     }else{
         return 'Archivo no existe';
     }
+
+
+}
+
+function sha1_fitxer($fitxer){
+    $fileName = BASE.DIRECTORY_SEPARATOR.$fitxer;
+
+    if (is_file($fileName)){
+        $sha1File = sha1($fileName);
+
+        return 'sha1 de archivo '.$fitxer.' es '.$sha1File;
+    }else{
+        return 'Archivo no existe';
+    }
+
+}
+
+function md5_fitxer($fitxer){
+    $fileName = BASE.DIRECTORY_SEPARATOR.$fitxer;
+
+    if (is_file($fileName)){
+        $md5File = md5_file($fileName);
+
+        return 'sha1 de archivo '.$fitxer.' es '.$md5File;
+    }else{
+        return 'Archivo no existe';
+    }
+
 }
 
 function crea_modifica_fixer($fixer,$contigut){

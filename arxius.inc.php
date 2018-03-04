@@ -58,11 +58,11 @@ function mou_fitxer($fitxer,$rutadesti){
 }
 
 function copia_fitxer($fitxer, $rutadesti){
-    $carpeta_desti = before_last(DIRECTORY_SEPARATOR,$rutadesti);
-    if (file_exists($fitxer)){
+    $carpeta_desti = BASE.DIRECTORY_SEPARATOR.$rutadesti;
+    if (file_exists(BASE.DIRECTORY_SEPARATOR.$fitxer)){
         if (is_dir($carpeta_desti)){
-            if (copy($fitxer,$rutadesti)){
-                return 'Archivo '.$fitxer.' copiado como '.$rutadesti;
+            if (copy(BASE.DIRECTORY_SEPARATOR.$fitxer,$carpeta_desti.DIRECTORY_SEPARATOR.$fitxer)){
+                return 'Archivo '.$fitxer.' copiado a '.$rutadesti;
             }else{
                 return 'Error de copiar archivo';
             }
@@ -123,18 +123,6 @@ function crea_modifica_fixer($fixer,$contigut){
     }
 }
 
-
-function before_last ($thiss, $inthat)
-{
-    return substr($inthat, 0, strrevpos($inthat, $thiss));
-};
-
-function strrevpos($instr, $needle)
-{
-    $rev_pos = strpos (strrev($instr), strrev($needle));
-    if ($rev_pos===false) return false;
-    else return strlen($instr) - $rev_pos - strlen($needle);
-};
 
 
 

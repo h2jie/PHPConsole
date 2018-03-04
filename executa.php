@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($comando[1] == '-d') {
                     $dir = $comando[2];
                     $rutadesti = $comando[3];
-                    $cp = copia_fitxer($dir, $rutadesti);
+                    $cp = copia_directori($dir, $rutadesti);
                     $_SESSION['answer'] = $cp;
                 }elseif ($comando[1]=='-f'){
                     $fitxer = $comando[2];

@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                 $path = ruta();
                 $_SESSION['answer'] = $path;
                 break;
-            case 'fdisk':
+            case 'stats':
                 $fdisk = stats_sistema();
                 $_SESSION['answer'] = $fdisk;
                 break;
@@ -37,10 +37,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                 $mkdir = crea_directori($command);
                 $_SESSION['answer'] = $mkdir;
                 break;
-            case 'rmdir':
-                $nombreCarpeta = $comando[1];
-                $rmdir = esborra_directori($nombreCarpeta);
-                $_SESSION['answer'] = $rmdir;
+            case 'rm':
+                $flag = $comando[1];
+                $nombreCosa = $comando[2];
+                if ($flag == '-f'){
+                    $rm = esborra_fitxer($nombreCosa);
+                }else if( $flag == '-d'){
+                    $rm = esborra_directori($nombreCosa);
+                }else{
+                    $rm = 'Este flag no existe';
+                }
+                $_SESSION['answer'] = $rm;
                 break;
             case 'mvdir':
                 $dir=$comando[1];

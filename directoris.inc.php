@@ -22,13 +22,12 @@ function crea_directori($dir)
 
 function esborra_directori($dir)
 {
-    //return $dir;
     $dir_path = BASE.DIRECTORY_SEPARATOR.$dir;
 
     if (file_exists($dir_path)) {
         $content = scandir($dir_path);
         if (empty($content)) {
-            if (is_dir()){
+            if (is_dir($dir_path)){
                 rmdir($dir_path);
             }else{
                 unlink($dir_path);

@@ -74,6 +74,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                 $find = find_fixer($fixer,$dir);
                 $_SESSION['answer']= $find;
                 break;
+            case 'vim':
+                $fixer = $comando[1];
+                $contigut = $comando[2];
+                $vim = crea_modifica_fixer($fixer,$contigut);
+                $_SESSION['answer'] = $vim;
+                break;
             default:
                 $list = ['Command not found'];
                 $_SESSION['answer'] = $list;

@@ -58,19 +58,55 @@ function mou_fitxer($fitxer,$rutadesti){
 }
 
 function copia_fitxer($fitxer, $rutadesti){
-    $archivoOriginal = BASE.DIRECTORY_SEPARATOR.$fitxer;
-    $archivoDesti = BASE.DIRECTORY_SEPARATOR.$rutadesti.DIRECTORY_SEPARATOR;
-
+    $carpeta_desti = before_last(DIRECTORY_SEPARATOR,$rutadesti);
     if (file_exists($fitxer)){
-        if (copy($fitxer,$rutadesti)){
-            return 'Archivo '.$fitxer.' copiado como '.$rutadesti;
+        if (is_dir($carpeta_desti)){
+            if (copy($fitxer,$rutadesti)){
+                return 'Archivo '.$fitxer.' copiado como '.$rutadesti;
+            }else{
+                return 'Error de copiar archivo';
+            }
         }else{
-            return 'Error de copiar archivo';
+            if (mkdir($carpeta_desti)){
+                copia_fitxer($fitxer,$rutadesti);
+            }
         }
     }else{
         return 'Archivo no existe';
     }
 }
+
+function crea_modifica_fixer($fixer,$contigut){
+    $fixer_path = BASE.DIRECTORY_SEPARATOR.$fixer;
+    if (empty($contigut)){
+        //return 'llega aqui=?';
+        //return BASE.DIRECTORY_SEPARATOR.$fixer;
+        fopen($fixer_path,"w");
+        return "Se ha creado el archivo ".$fixer;
+    }else{
+        if (file_exists($fixer_path)){
+            $file_stream = fopen($fixer_path,"w");
+            fwrite($file_stream,$contigut);
+            fclose($file_stream);
+            return "Se ha modificado el archivo";
+        }else{
+            return "El archivo '".$fixer."' no existe";
+        }
+    }
+}
+
+
+function before_last ($thiss, $inthat)
+{
+    return substr($inthat, 0, strrevpos($inthat, $thiss));
+};
+
+function strrevpos($instr, $needle)
+{
+    $rev_pos = strpos (strrev($instr), strrev($needle));
+    if ($rev_pos===false) return false;
+    else return strlen($instr) - $rev_pos - strlen($needle);
+};
 
 
 
